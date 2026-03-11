@@ -28,15 +28,23 @@ app.get("/", (req, res) => {
 
 /* GET employees */
 app.get("/employees", async (req, res) => {
-  const employees = await Employee.find();
-  res.json(employees);
+  try {
+    const employees = await Employee.find();
+    res.json(employees);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 /* POST employee */
 app.post("/employees", async (req, res) => {
-  const employee = new Employee(req.body);
-  const saved = await employee.save();
-  res.json(saved);
+  try {
+    const employee = new Employee(req.body);
+    const saved = await employee.save();
+    res.json(saved);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 const PORT = process.env.PORT || 4000;
