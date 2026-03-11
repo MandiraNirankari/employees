@@ -12,6 +12,15 @@ mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.log(err));
 
+/* Employee Schema */
+const employeeSchema = new mongoose.Schema({
+  name: String,
+  position: String,
+  salary: Number
+});
+
+const Employee = mongoose.model("Employee", employeeSchema);
+
 /* Home route */
 app.get("/", (req, res) => {
   res.send("Employee API is running successfully");
